@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: mlconf-back
+
+server:
+  port: 8080

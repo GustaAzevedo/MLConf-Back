@@ -1,0 +1,23 @@
+# Build
+/target/
+/.mvn/wrapper/maven-wrapper.jar
+
+# IDEs
+/.idea/
+*.iml
+/.vscode/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Local env
+.env
+.env.*
+
+/docs/**
