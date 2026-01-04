@@ -1,0 +1,2 @@
+-- Baseline inicial do schema (Bloco 3)
+-- Sem tabelas ainda: apenas para garantir que o Flyway execute e registre a versão.
