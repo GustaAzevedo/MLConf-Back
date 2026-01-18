@@ -1,8 +1,8 @@
-package com.mlconf.domain.conference.model;
+package com.mlconf.core.domain.conference.model;
 
-import com.mlconf.domain.common.DomainException;
-import com.mlconf.domain.conference.model.enums.IssueCategory;
-import com.mlconf.domain.conference.model.enums.ItemState;
+import com.mlconf.core.domain.common.DomainException;
+import com.mlconf.core.domain.conference.model.enums.IssueCategory;
+import com.mlconf.core.domain.conference.model.enums.ItemState;
 
 import java.util.Objects;
 
@@ -33,4 +33,3 @@ public final class ConferenceItem {
         return issueCategory;
     }
 }
-

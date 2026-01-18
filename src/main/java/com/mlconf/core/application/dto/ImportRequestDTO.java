@@ -1,4 +1,4 @@
-package com.mlconf.application.dto;
+package com.mlconf.core.application.dto;
 
 import java.util.List;
 import java.util.Objects;

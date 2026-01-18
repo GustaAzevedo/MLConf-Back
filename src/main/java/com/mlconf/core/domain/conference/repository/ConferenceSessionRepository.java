@@ -1,6 +1,6 @@
-package com.mlconf.domain.conference.repository;
+package com.mlconf.core.domain.conference.repository;
 
-import com.mlconf.domain.conference.model.ConferenceSession;
+import com.mlconf.core.domain.conference.model.ConferenceSession;
 
 import java.util.Optional;
 import java.util.UUID;

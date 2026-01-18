@@ -1,6 +1,6 @@
-package com.mlconf.domain.conference.model;
+package com.mlconf.core.domain.conference.model;
 
-import com.mlconf.domain.common.DomainException;
+import com.mlconf.core.domain.common.DomainException;
 
 import java.time.Instant;
 import java.util.Objects;

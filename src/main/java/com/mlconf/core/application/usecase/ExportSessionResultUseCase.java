@@ -1,6 +1,6 @@
-package com.mlconf.application.usecase;
+package com.mlconf.core.application.usecase;
 
-import com.mlconf.application.dto.SessionSnapshotDTO;
+import com.mlconf.core.application.dto.SessionSnapshotDTO;
 
 import java.util.UUID;
 

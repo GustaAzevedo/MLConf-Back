@@ -1,7 +1,7 @@
-package com.mlconf.application.dto;
+package com.mlconf.core.application.dto;
 
-import com.mlconf.domain.conference.model.enums.IssueCategory;
-import com.mlconf.domain.conference.model.enums.ItemState;
+import com.mlconf.core.domain.conference.model.enums.IssueCategory;
+import com.mlconf.core.domain.conference.model.enums.ItemState;
 
 import java.time.Instant;
 import java.util.List;

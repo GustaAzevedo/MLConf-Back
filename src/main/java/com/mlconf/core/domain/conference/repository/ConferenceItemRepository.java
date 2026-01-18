@@ -1,6 +1,6 @@
-package com.mlconf.domain.conference.repository;
+package com.mlconf.core.domain.conference.repository;
 
-import com.mlconf.domain.conference.model.ConferenceItem;
+import com.mlconf.core.domain.conference.model.ConferenceItem;
 
 import java.util.Collection;
 import java.util.List;

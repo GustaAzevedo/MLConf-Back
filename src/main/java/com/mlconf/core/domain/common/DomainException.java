@@ -1,4 +1,4 @@
-package com.mlconf.domain.common;
+package com.mlconf.core.domain.common;
 
 public class DomainException extends RuntimeException {
 

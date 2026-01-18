@@ -1,4 +1,4 @@
-package com.mlconf.domain.conference.model.enums;
+package com.mlconf.core.domain.conference.model.enums;
 
 public enum ItemState {
     PENDING,
