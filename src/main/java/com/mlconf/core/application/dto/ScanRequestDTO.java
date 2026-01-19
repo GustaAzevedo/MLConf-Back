@@ -1,7 +1,5 @@
 package com.mlconf.core.application.dto;
 
-import java.util.Objects;
-
 public record ScanRequestDTO(String packageId) {
 
     public ScanRequestDTO {

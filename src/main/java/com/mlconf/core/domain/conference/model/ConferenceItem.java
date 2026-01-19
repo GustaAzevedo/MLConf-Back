@@ -32,4 +32,18 @@ public final class ConferenceItem {
     public IssueCategory getIssueCategory() {
         return issueCategory;
     }
+
+    public ConferenceItem confirm() {
+        if (state == ItemState.CONFIRMED) {
+            return this;
+        }
+        return new ConferenceItem(packageId, ItemState.CONFIRMED, issueCategory);
+    }
+
+    public ConferenceItem markMissingIfPending() {
+        if (state == ItemState.PENDING) {
+            return new ConferenceItem(packageId, ItemState.MISSING, issueCategory);
+        }
+        return this;
+    }
 }
