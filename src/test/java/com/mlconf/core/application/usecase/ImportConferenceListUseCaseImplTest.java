@@ -2,7 +2,7 @@ package com.mlconf.core.application.usecase;
 
 import com.mlconf.core.application.dto.ImportRequestDTO;
 import com.mlconf.core.application.usecase.impl.ImportConferenceListUseCaseImpl;
-import com.mlconf.core.domain.common.DomainException;
+import com.mlconf.core.application.error.NotFoundException;
 import com.mlconf.core.domain.conference.model.ConferenceItem;
 import com.mlconf.core.domain.conference.model.ConferenceSession;
 import com.mlconf.core.domain.conference.model.enums.ItemState;
@@ -45,7 +45,7 @@ class ImportConferenceListUseCaseImplTest {
         var useCase = new ImportConferenceListUseCaseImpl(sessionRepository, itemRepository);
 
         assertThatThrownBy(() -> useCase.execute(UUID.randomUUID(), new ImportRequestDTO(List.of("PKG-1"))))
-                .isInstanceOf(DomainException.class);
+            .isInstanceOf(NotFoundException.class);
     }
 
     private static final class InMemorySessionRepository implements ConferenceSessionRepository {

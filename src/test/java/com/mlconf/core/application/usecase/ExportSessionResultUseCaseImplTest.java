@@ -1,8 +1,7 @@
 package com.mlconf.core.application.usecase;
 
-import com.mlconf.core.application.dto.ScanRequestDTO;
-import com.mlconf.core.application.usecase.impl.RegisterScanUseCaseImpl;
 import com.mlconf.core.application.error.NotFoundException;
+import com.mlconf.core.application.usecase.impl.ExportSessionResultUseCaseImpl;
 import com.mlconf.core.domain.conference.model.ConferenceItem;
 import com.mlconf.core.domain.conference.model.ConferenceSession;
 import com.mlconf.core.domain.conference.model.enums.ItemState;
@@ -19,35 +18,34 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class RegisterScanUseCaseImplTest {
+class ExportSessionResultUseCaseImplTest {
 
     @Test
-    void registersScanAndReturnsSnapshot() {
-        var sessionId = UUID.fromString("00000000-0000-0000-0000-000000000030");
-        var session = new ConferenceSession(sessionId, ConferenceSession.Status.OPEN, Instant.parse("2026-01-18T22:20:00Z"), null);
+    void exportsSessionSnapshot() {
+        var sessionId = UUID.fromString("00000000-0000-0000-0000-000000000050");
+        var session = new ConferenceSession(sessionId, ConferenceSession.Status.OPEN, Instant.parse("2026-01-18T22:50:00Z"), null);
         var sessionRepository = new InMemorySessionRepository(session);
         var itemRepository = new InMemoryItemRepository(
-                new ConferenceItem("PKG-1", ItemState.PENDING, null),
-                new ConferenceItem("PKG-2", ItemState.PENDING, null)
+                new ConferenceItem("PKG-1", ItemState.CONFIRMED, null)
         );
 
-        var useCase = new RegisterScanUseCaseImpl(sessionRepository, itemRepository);
+        var useCase = new ExportSessionResultUseCaseImpl(sessionRepository, itemRepository);
 
-        var snapshot = useCase.execute(sessionId, new ScanRequestDTO("PKG-2"));
+        var snapshot = useCase.execute(sessionId);
 
-        assertThat(snapshot.items()).hasSize(2);
-        assertThat(snapshot.items().stream().filter(i -> i.packageId().equals("PKG-2")).findFirst().orElseThrow().state())
-                .isEqualTo(ItemState.CONFIRMED);
+        assertThat(snapshot.sessionId()).isEqualTo(sessionId);
+        assertThat(snapshot.items()).hasSize(1);
+        assertThat(snapshot.items().get(0).state()).isEqualTo(ItemState.CONFIRMED);
     }
 
     @Test
     void rejectsWhenSessionNotFound() {
         var sessionRepository = new InMemorySessionRepository();
         var itemRepository = new InMemoryItemRepository();
-        var useCase = new RegisterScanUseCaseImpl(sessionRepository, itemRepository);
+        var useCase = new ExportSessionResultUseCaseImpl(sessionRepository, itemRepository);
 
-        assertThatThrownBy(() -> useCase.execute(UUID.randomUUID(), new ScanRequestDTO("PKG-1")))
-            .isInstanceOf(NotFoundException.class);
+        assertThatThrownBy(() -> useCase.execute(UUID.randomUUID()))
+                .isInstanceOf(NotFoundException.class);
     }
 
     private static final class InMemorySessionRepository implements ConferenceSessionRepository {

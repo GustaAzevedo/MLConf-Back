@@ -6,6 +6,8 @@ import com.mlconf.core.application.usecase.CreateSessionUseCase;
 import com.mlconf.core.domain.conference.model.ConferenceSession;
 import com.mlconf.core.domain.conference.repository.ConferenceItemRepository;
 import com.mlconf.core.domain.conference.repository.ConferenceSessionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Clock;
 import java.util.List;
@@ -13,6 +15,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 public final class CreateSessionUseCaseImpl implements CreateSessionUseCase {
+
+    private static final Logger logger = LoggerFactory.getLogger(CreateSessionUseCaseImpl.class);
 
     private final ConferenceSessionRepository sessionRepository;
     private final ConferenceItemRepository itemRepository;
@@ -31,6 +35,7 @@ public final class CreateSessionUseCaseImpl implements CreateSessionUseCase {
         var session = new ConferenceSession(UUID.randomUUID(), ConferenceSession.Status.OPEN, clock.instant(), null);
         var saved = sessionRepository.save(session);
         var items = itemRepository.findAllBySessionId(saved.getId());
+        logger.info("Session created: sessionId={}", saved.getId());
         return SessionSnapshotMapper.toSnapshot(saved, items == null ? List.of() : items);
     }
 }
